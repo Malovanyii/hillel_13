@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Відправка форми</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="wrapper">
+			<form id="contactForm">
+				<h2>We would like to help you</h2>
+				<input type="text" id="name" name="user_name" placeholder="Name" />
+				<p class="error" id="nameError"></p>
+
+				<textarea
+					name="user_message"
+					id="message"
+					placeholder="Message"
+					rows="4"
+				></textarea>
+				<p class="error" id="messageError"></p>
+
+				<h3>How to answer you?</h3>
+				<input
+					type="text"
+					id="phone"
+					name="user_phone"
+					placeholder="+380 (___) ___-__-__"
+				/>
+				<p class="error" id="phoneError"></p>
+
+				<input type="email" id="email" name="user_email" placeholder="Email" />
+				<p class="error" id="emailError"></p>
+
+				<button type="submit">Send message</button>
+				<button type="reset">Reset</button>
+			</form>
+		</div>
+		<script src="index.js"></script>
+	</body>
+</html>
