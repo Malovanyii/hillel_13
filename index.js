@@ -1,58 +1,54 @@
-const form = document.getElementById('contactForm');
-const nameInput = document.getElementById('name');
-const messageInput = document.getElementById('message');
-const phoneInput = document.getElementById('phone');
-const emailInput = document.getElementById('email');
-const nameError = document.getElementById('nameError');
-const messageError = document.getElementById('messageError');
-const phoneError = document.getElementById('phoneError');
-const emailError = document.getElementById('emailError');
+const form = document.getElementById("contactForm");
+    const nameError = document.getElementById("nameError");
+    const messageError = document.getElementById("messageError");
+    const phoneError = document.getElementById("phoneError");
+    const emailError = document.getElementById("emailError");
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-    const messageRegex = /.{5,}/;
-    const phoneRegex = /^\+380\d{9}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const formData = new FormData(form);
+      const formEntries = Object.fromEntries(formData.entries());
 
-    let isValid = true;
+      const messageRegex = /.{5,}/;
+      const phoneRegex = /^\+380\d{9}$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (nameInput.value.trim() === '') {
-        nameError.textContent = 'Поле "Ім\'я" є обов\'язковим для заповнення';
+      let isValid = true;
+
+      if (!formEntries.user_name || /^\s*$/.test(formEntries.user_name)) {
+        nameError.textContent = "Поле \"Ім'я\" є обов'язковим для заповнення";
         isValid = false;
-    } else {
-        nameError.textContent = '';
-    }
+      } else {
+        nameError.textContent = "";
+      }
 
-    if (!messageRegex.test(messageInput.value)) {
-        messageError.textContent = 'Повідомлення має бути мінімум 5 символів';
+      if (!messageRegex.test(formEntries.user_message)) {
+        messageError.textContent = "Повідомлення має бути мінімум 5 символів";
         isValid = false;
-    } else {
-        messageError.textContent = '';
-    }
+      } else {
+        messageError.textContent = "";
+      }
 
-    const phoneValue = phoneInput.value.trim();
-    if (!phoneValue) {
+      if (!formEntries.user_phone) {
         phoneError.textContent = 'Поле "Телефон" є обов\'язковим для заповнення';
         isValid = false;
-    } else if (!phoneRegex.test(phoneValue)) {
-        phoneError.textContent = 'Номер телефону має починатися з +380 та містити 9 цифр після';
+      } else if (!phoneRegex.test(formEntries.user_phone)) {
+        phoneError.textContent =
+          "Номер телефону має починатися з +380 та містити 9 цифр після";
         isValid = false;
-    } else {
-        phoneError.textContent = '';
-    }
+      } else {
+        phoneError.textContent = "";
+      }
 
-    if (!emailRegex.test(emailInput.value)) {
-        emailError.textContent = 'Некоректна електронна адреса';
+      if (!emailRegex.test(formEntries.user_email)) {
+        emailError.textContent = "Некоректна електронна адреса";
         isValid = false;
-    } else {
-        emailError.textContent = '';
-    }
+      } else {
+        emailError.textContent = "";
+      }
 
-    if (isValid) {
-        const formData = new FormData(form);
-        const formEntries = Object.fromEntries(formData.entries());
-
-        console.log('Дані форми:', formEntries);
-    };
-});
+      if (isValid) {
+        console.log("Дані форми:", formEntries);
+      }
+    });
