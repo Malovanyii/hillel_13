@@ -11,8 +11,6 @@ const emailError = document.getElementById('emailError');
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const nameInput = document.getElementById('name');
-    const nameError = document.getElementById('nameError');
     const messageRegex = /.{5,}/;
     const phoneRegex = /^\+380\d{9}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,9 +50,9 @@ form.addEventListener('submit', (event) => {
     }
 
     if (isValid) {
-        console.log('Ім\'я:', nameInput.value);
-        console.log('Повідомлення:', messageInput.value);
-        console.log('Телефон:', phoneInput.value);
-        console.log('Email:', emailInput.value);
-    }
+        const formData = new FormData(form);
+        const formEntries = Object.fromEntries(formData.entries());
+
+        console.log('Дані форми:', formEntries);
+    };
 });
